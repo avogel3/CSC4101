@@ -1,6 +1,6 @@
 # Ignore DS Store
 .DS_Store
-/prog2/DS_Store
-/prog3/DS_Store
+/prog2/.DS_Store
+/prog3/.DS_Store
 
 

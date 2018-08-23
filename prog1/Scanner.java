@@ -20,9 +20,20 @@ class Scanner {
       System.err.println("We fail: " + e.getMessage());
     }
 
-    //  Skip White Space
+    // Skip White Space
     if((bite >= 9 && bite <=13) || bite == 32) {
       return getNextToken();
+    }
+
+    // Skip Comments. Discard from `;` to EOL
+    if(bite == 59) {
+      while(bite != -1 && bite != 13) {
+        try {
+          bite = in.read();
+        } catch (IOException e) {
+          System.err.println("We fail on comment: " + e.getMessage());
+        }
+      }
     }
 
     if (bite == -1)

@@ -1,6 +1,7 @@
-# Ignore DS Store
 .DS_Store
-/prog2/.DS_Store
-/prog3/.DS_Store
-
+.idea
+prog1/CSC4101-prog1.pdf
+prog1/prog-uml.pdf
+prog1/prog1.iml
+prog1/test/
 

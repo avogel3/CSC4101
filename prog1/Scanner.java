@@ -20,8 +20,11 @@ class Scanner {
       System.err.println("We fail: " + e.getMessage());
     }
 
-    // TODO: skip white space and comments
-	
+    //  Skip White Space
+    if((bite >= 9 && bite <=13) || bite == 32) {
+      return getNextToken();
+    }
+
     if (bite == -1)
       return null;
 

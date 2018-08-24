@@ -39,16 +39,20 @@ class Node {
   // in class Cons.  After setCar, a Cons cell needs to be `parsed' again
   // using parseList.
   public Node getCar() {
+    System.err.println("Method not implemented: getCar()");
     return null;
   }
   
   public Node getCdr() {
+    System.err.println("Method not implemented: getCdr()");
     return null;
   }
   
   public void setCar(Node a) {
+    System.err.println("Method not implemented: setCar()");
   }
   
   public void setCdr(Node d) {
+    System.err.println("Method not implemented: setCdr()");
   }
 }

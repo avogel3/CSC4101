@@ -23,6 +23,13 @@ class Scanner {
         return bite;
     }
 
+    private int readToEndOfLine(int bite) {
+        while (bite != -1 && bite != 13) {
+            bite = nextCharacterFromStream();
+        }
+        return bite;
+    }
+
     private Token identifyBoolean(int bite) {
         char ch = (char) bite;
         if (ch == 't')
@@ -45,9 +52,7 @@ class Scanner {
 
         // Skip Comments. Discard from `;` to EOL
         if (bite == 59) {
-            while (bite != -1 && bite != 13) {
-                bite = nextCharacterFromStream();
-            }
+            bite = readToEndOfLine(bite);
         }
 
         if (bite == -1)

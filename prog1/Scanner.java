@@ -23,6 +23,18 @@ class Scanner {
         return bite;
     }
 
+    private Token identifyBoolean(int bite) {
+        char ch = (char) bite;
+        if (ch == 't')
+            return new Token(Token.TRUE);
+        else if (ch == 'f')
+            return new Token(Token.FALSE);
+        else {
+            System.err.println("Illegal character '" + (char) ch + "' following #");
+            return getNextToken();
+        }
+    }
+
     public Token getNextToken() {
         int bite = nextCharacterFromStream();
 
@@ -54,22 +66,14 @@ class Scanner {
             // We ignore the special identifier `...'.
             return new Token(Token.DOT);
 
-            // Boolean constants
+        // Boolean constants
         else if (ch == '#') {
             bite = nextCharacterFromStream();
             if (bite == -1) {
                 System.err.println("Unexpected EOF following #");
                 return null;
             }
-            ch = (char) bite;
-            if (ch == 't')
-                return new Token(Token.TRUE);
-            else if (ch == 'f')
-                return new Token(Token.FALSE);
-            else {
-                System.err.println("Illegal character '" + (char) ch + "' following #");
-                return getNextToken();
-            }
+            return identifyBoolean(bite);
         }
 
         // String constants

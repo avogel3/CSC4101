@@ -24,7 +24,7 @@ class Scanner {
     }
 
     private int readToEndOfLine(int bite) {
-        while (bite != -1 && bite != 13) {
+        while (bite != -1 && bite != 10) {
             bite = nextCharacterFromStream();
         }
         return bite;

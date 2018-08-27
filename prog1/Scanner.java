@@ -10,9 +10,8 @@ class Scanner {
         in = new PushbackInputStream(i);
     }
 
-    // It would be more efficient if we'd maintain our own input buffer
-    // and read characters out of that buffer, but reading individual
-    // characters from the input stream is easier.
+    // Return the bite character in ASCII form
+    // - OR - return -1
     private int nextCharacterFromStream() {
         int bite = -1;
         try {
@@ -89,12 +88,22 @@ class Scanner {
 
         // Integer constants
         else if (ch >= '0' && ch <= '9') {
-            int i = ch - '0';
-            // TODO: scan the number and convert it to an integer
+            StringBuilder sb = new StringBuilder();
+            while(ch >= '0' && ch <= '9' && bite != -1) {
+                ch = (char) bite;
+                sb.append(ch);
+                bite = nextCharacterFromStream();
+            }
 
-            // put the character after the integer back into the input
-            // in->putback(ch);
-            return new IntToken(i);
+            try {
+                in.unread(bite);
+            } catch (java.io.IOException e) {
+                System.err.println(e);
+            }
+
+            String stringNum = sb.toString();
+            System.out.println(stringNum);
+            return new IntToken(Integer.parseInt(stringNum));
         }
 
         // Identifiers

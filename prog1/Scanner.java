@@ -41,10 +41,34 @@ class Scanner {
         }
     }
 
-    private String newStringFromBuffer(int stringLength) {
+    private String getStringFromBuffer(int stringLength) {
         byte[] newString = new byte[stringLength];
         System.arraycopy(buf,0, newString,0, stringLength);
         return new String(newString);
+    }
+
+    private boolean isValidIdentInitial(char ch) {
+        return (ch == '!'
+                || ch == '$'
+                || ch == '%'
+                || ch == '&'
+                || ch == '*'
+                || ch == '/'
+                || ch == ':'
+                || ch == '<'
+                || ch == '='
+                || ch == '>'
+                || ch == '?'
+                || ch == '^'
+                || ch == '_'
+                || ch == '~'
+                || (ch >= 'a' && ch <= 'z')
+                || (ch >= 'A' && ch <= 'Z'));
+    }
+
+    public void pushBackStream(Token token) {
+        token.
+        in.unread();
     }
 
     public Token getNextToken() {
@@ -97,7 +121,7 @@ class Scanner {
                 ch = (char) bite;
                 charCount++;
             }
-            String stringConstant = newStringFromBuffer(charCount);
+            String stringConstant = getStringFromBuffer(charCount);
             return new StrToken(stringConstant);
         }
 
@@ -122,13 +146,23 @@ class Scanner {
         }
 
         // Identifiers
-        else if (ch >= 'A' && ch <= 'Z'
-         /* or ch is some other valid first character for an identifier */) {
-            // TODO: scan an identifier into the buffer
+        else if (isValidIdentInitial(ch)) {
+            int identCharCount = 0;
+            while(isValidIdentInitial(ch)) {
+                buf[identCharCount] = (byte) ch;
+                bite = nextCharacterFromStream();
+                ch = (char) bite;
+                identCharCount++;
+            }
 
-            // put the character after the identifier back into the input
-            // in->putback(ch);
-            return new IdentToken(buf.toString());
+            try {
+                in.unread(bite);
+            } catch (java.io.IOException e) {
+                System.err.println(e);
+            }
+
+            String identString = getStringFromBuffer(identCharCount);
+            return new IdentToken(identString);
         }
 
         // Illegal character

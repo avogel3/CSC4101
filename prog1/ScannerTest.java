@@ -76,7 +76,12 @@ public class ScannerTest {
 
     @Test
     public void getNextTokenTestIdentifiers() {
-       assertEquals(true, false);
+       InputStream sampleInput = stringToByteStream("Hello");
+       Scanner in = new Scanner(sampleInput);
+       Token ident = in.getNextToken();
+       assertEquals(Token.IDENT, ident.getType());
+       assertEquals("Hello", ident.getName());
+       // TODO: Test for valid subsequent. See: http://people.csail.mit.edu/jaffer/r5rs_9.html
     }
 
 

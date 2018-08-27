@@ -37,16 +37,22 @@ class Parser {
   private Scanner scanner;
 
   public Parser(Scanner s) { scanner = s; }
-  
+
+
+  // TODO: Gotta figure out where the QUOTE token fits in all of this
   public Node parseExp() {
-    // TODO: write code for parsing an exp
+    // TODO: See below
+    // STRING, INT, BOOLEAN, IDENT -> Call new for literals
+    // LPAREN -> Call parseRest
+    // default/else -> null
     return null;
   }
   
   protected Node parseRest() {
-    // TODO: write code for parsing rest
+    // TODO: See below
+    // RPAREN ->
+    // DOT ->
+    // default/else ->
     return null;
   }
-  
-  // TODO: Add any additional methods you might need.
 };

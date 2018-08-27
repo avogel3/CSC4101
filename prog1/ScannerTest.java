@@ -71,7 +71,7 @@ public class ScannerTest {
         Scanner in = new Scanner(sampleInput);
         Token stringConstant = in.getNextToken();
         assertEquals(Token.STRING, stringConstant.getType());
-        assertEquals("\"Hello\"", stringConstant.getStrVal());
+        assertEquals("Hello", stringConstant.getStrVal());
     }
 
     @Test

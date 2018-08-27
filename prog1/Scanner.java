@@ -41,6 +41,12 @@ class Scanner {
         }
     }
 
+    private String newStringFromBuffer(int stringLength) {
+        byte[] newString = new byte[stringLength];
+        System.arraycopy(buf,0, newString,0, stringLength);
+        return new String(newString);
+    }
+
     public Token getNextToken() {
         int bite = nextCharacterFromStream();
 
@@ -82,8 +88,17 @@ class Scanner {
 
         // String constants
         else if (ch == '"') {
-            // TODO: scan a string into the buffer variable buf
-            return new StrToken(buf.toString());
+            bite = nextCharacterFromStream();
+            ch = (char) bite;
+            int charCount = 0;
+            while(ch != '"' && bite != -1) {
+                buf[charCount] = (byte) ch;
+                bite = nextCharacterFromStream();
+                ch = (char) bite;
+                charCount++;
+            }
+            String stringConstant = newStringFromBuffer(charCount);
+            return new StrToken(stringConstant);
         }
 
         // Integer constants

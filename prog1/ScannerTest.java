@@ -26,7 +26,7 @@ public class ScannerTest {
         Token fourth = in.getNextToken();
         assertEquals(Token.QUOTE, fourth.getType());
         Token last = in.getNextToken();
-        assertEquals(null, last); // Expect scanning past end of string to be null
+        assertNull(last); // Expect scanning past end of string to be null
     }
 
     @Test

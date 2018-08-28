@@ -10,27 +10,88 @@ class Scanner {
         in = new PushbackInputStream(i);
     }
 
+
+    public void pushBackStream(char ch) {
+        try {
+            int bite = (int) ch;
+            in.unread(bite);
+        } catch (java.io.IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    public Token getNextToken() {
+        char ch = nextCharacterFromStream();
+
+        // Skip White Space
+        if (isWhiteSpace(ch)) {
+            return getNextToken();
+        }
+
+        // Skip Comments. Discard from `;` to EOL
+        if (ch == ';') {
+            readToEndOfLine(ch);
+            return getNextToken();
+        }
+
+        if (ch == Character.MIN_VALUE) {
+            return null;
+        }
+
+        if (ch == '\'')
+            return new Token(Token.QUOTE);
+        else if (ch == '(')
+            return new Token(Token.LPAREN);
+        else if (ch == ')')
+            return new Token(Token.RPAREN);
+        else if (ch == '.')
+            // We ignore the special identifier `...'.
+            return new Token(Token.DOT);
+        else if (ch == '#')
+            return identifyBoolean();
+        else if (ch == '"') {
+            ch = nextCharacterFromStream();
+            String stringConstant = readInputIntoBuffer("STRING", ch);
+            return new StrToken(stringConstant);
+        } else if (ch >= '0' && ch <= '9') {
+            String integerConstant = readInputIntoBuffer("INTEGER", ch);
+            return new IntToken(Integer.parseInt(integerConstant));
+        } else if (isValidIdentifierInitial(ch)) {
+            String identifier = readInputIntoBuffer("IDENTIFIER", ch);
+            return new IdentToken(identifier);
+        } else {
+            // Illegal character
+            System.err.println("Illegal input character '" + (byte) ch + '\'');
+            return getNextToken();
+        }
+    }
+
+    // Helper Methods
+
     // Return the bite character in ASCII form
-    // - OR - return -1
-    private int nextCharacterFromStream() {
+    private char nextCharacterFromStream() {
         int bite = -1;
         try {
             bite = in.read();
         } catch (IOException e) {
             System.err.println("We fail:" + e.getMessage());
         }
-        return bite;
-    }
 
-    private int readToEndOfLine(int bite) {
-        while (bite != -1 && bite != 10) {
-            bite = nextCharacterFromStream();
+        if (bite == -1) {
+            return Character.MIN_VALUE;
         }
-        return bite;
+
+        return (char) bite;
     }
 
-    private Token identifyBoolean(int bite) {
-        char ch = (char) bite;
+    private void readToEndOfLine(char ch) {
+        while (ch != '\n') {
+            ch = nextCharacterFromStream();
+        }
+    }
+
+    private Token identifyBoolean() {
+        char ch = nextCharacterFromStream();
         if (ch == 't')
             return new Token(Token.TRUE);
         else if (ch == 'f')
@@ -41,13 +102,15 @@ class Scanner {
         }
     }
 
-    private String getStringFromBuffer(int stringLength) {
-        byte[] newString = new byte[stringLength];
-        System.arraycopy(buf,0, newString,0, stringLength);
-        return new String(newString);
+    private boolean isWhiteSpace(char ch) {
+        return (ch == ' '
+                || ch == '\t'
+                || ch == '\n'
+                || ch == '\r'
+                || ch == '\f');
     }
 
-    private boolean isValidIdentInitial(char ch) {
+    private boolean isValidIdentifierInitial(char ch) {
         return (ch == '!'
                 || ch == '$'
                 || ch == '%'
@@ -66,109 +129,35 @@ class Scanner {
                 || (ch >= 'A' && ch <= 'Z'));
     }
 
-    public void pushBackStream(Token token) {
-        token.
-        in.unread();
+    private String getStringFromBuffer(int stringLength) {
+        byte[] newString = new byte[stringLength];
+        System.arraycopy(buf, 0, newString, 0, stringLength);
+        return new String(newString);
     }
 
-    public Token getNextToken() {
-        int bite = nextCharacterFromStream();
+    private boolean inputBufferType(String type, char ch) {
+        switch (type) {
+            case "STRING":
+                return ch != '"';
+            case "INTEGER":
+                return (ch >= '0' && ch <= '9');
+            case "IDENTIFIER":
+                return isValidIdentifierInitial(ch);
+            default:
+                return false;
+        }
+    }
 
-        // Skip White Space
-        if ((bite >= 9 && bite <= 13) || bite == 32) {
-            return getNextToken();
+    private String readInputIntoBuffer(String type, char ch) {
+        int charCount = 0;
+        while (inputBufferType(type, ch)) {
+            buf[charCount] = (byte) ch;
+            ch = nextCharacterFromStream();
+            charCount++;
         }
 
-        // Skip Comments. Discard from `;` to EOL
-        if (bite == 59) {
-            bite = readToEndOfLine(bite);
-        }
+        pushBackStream(ch);
 
-        if (bite == -1)
-            return null;
-
-        char ch = (char) bite;
-
-        // Special characters
-        if (ch == '\'')
-            return new Token(Token.QUOTE);
-        else if (ch == '(')
-            return new Token(Token.LPAREN);
-        else if (ch == ')')
-            return new Token(Token.RPAREN);
-        else if (ch == '.')
-            // We ignore the special identifier `...'.
-            return new Token(Token.DOT);
-
-        // Boolean constants
-        else if (ch == '#') {
-            bite = nextCharacterFromStream();
-            if (bite == -1) {
-                System.err.println("Unexpected EOF following #");
-                return null;
-            }
-            return identifyBoolean(bite);
-        }
-
-        // String constants
-        else if (ch == '"') {
-            bite = nextCharacterFromStream();
-            ch = (char) bite;
-            int charCount = 0;
-            while(ch != '"' && bite != -1) {
-                buf[charCount] = (byte) ch;
-                bite = nextCharacterFromStream();
-                ch = (char) bite;
-                charCount++;
-            }
-            String stringConstant = getStringFromBuffer(charCount);
-            return new StrToken(stringConstant);
-        }
-
-        // Integer constants
-        else if (ch >= '0' && ch <= '9') {
-            StringBuilder sb = new StringBuilder();
-            while(ch >= '0' && ch <= '9' && bite != -1) {
-                ch = (char) bite;
-                sb.append(ch);
-                bite = nextCharacterFromStream();
-            }
-
-            try {
-                in.unread(bite);
-            } catch (java.io.IOException e) {
-                System.err.println(e);
-            }
-
-            String stringNum = sb.toString();
-            System.out.println(stringNum);
-            return new IntToken(Integer.parseInt(stringNum));
-        }
-
-        // Identifiers
-        else if (isValidIdentInitial(ch)) {
-            int identCharCount = 0;
-            while(isValidIdentInitial(ch)) {
-                buf[identCharCount] = (byte) ch;
-                bite = nextCharacterFromStream();
-                ch = (char) bite;
-                identCharCount++;
-            }
-
-            try {
-                in.unread(bite);
-            } catch (java.io.IOException e) {
-                System.err.println(e);
-            }
-
-            String identString = getStringFromBuffer(identCharCount);
-            return new IdentToken(identString);
-        }
-
-        // Illegal character
-        else {
-            System.err.println("Illegal input character '" + (char) ch + '\'');
-            return getNextToken();
-        }
+        return getStringFromBuffer(charCount);
     }
 }

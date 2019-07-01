@@ -50,9 +50,13 @@ class Parser {
     }
 
 
-    // TODO: Gotta figure out where the QUOTE token fits in all of this
     public Node parseExp() {
         Token token = scanner.getNextToken();
+        if (token == null) return null; // Guard against errors
+        else return getNodeByTokenType(token);
+    }
+
+    private Node getNodeByTokenType(Token token) {
         switch (token.getType()) {
             case Token.LPAREN:
                 return parseRest();
@@ -61,7 +65,7 @@ class Parser {
             case Token.TRUE:
                 return truthyBooleanLit;
             case Token.QUOTE:
-                return parseExp();
+                return new Cons(new Ident("quote"), new Cons(parseExp(), nil));
             case Token.INT:
                 return new IntLit(token.getIntVal());
             case Token.STRING:
@@ -74,22 +78,16 @@ class Parser {
     }
 
     protected Node parseRest() {
-        // TODO: See below
-        // RPAREN ->
-        // EXP + ->
-        // DOT EXP ->
-        // default/else ->
-
         Token token = scanner.getNextToken();
         switch(token.getType()) {
             case Token.RPAREN:
-                return null;
+                return nil;
             case Token.DOT:
-                // FIXME: Next line is untested
-                // return new Cons(new Ident(token.getName()), parseExp());
-                return null;
+                 return new Cons(new Ident(token.getName()), parseRest());
             default:
-                return new Cons(parseExp(), nil);
+                // NOTE: If we get here, `token` is something we can catch in getNodeByTokenType()
+                // and the first token was a `)`
+                return new Cons(getNodeByTokenType(token), parseRest());
         }
     }
 };

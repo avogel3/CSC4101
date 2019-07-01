@@ -41,17 +41,21 @@ public class ParserTest {
         Parser parser;
 
         parser = stubSampleParseInput("'15");
-        assertThat(parser.parseExp(), instanceOf(IntLit.class));
+        assertThat(parser.parseExp(), instanceOf(Cons.class));
 
         parser = stubSampleParseInput("'a");
-        assertThat(parser.parseExp(), instanceOf(Ident.class));
+        assertThat(parser.parseExp(), instanceOf(Cons.class));
     }
 
     @Test
     public void testParseExpRest() {
-        // TODO: ( rest
-        Parser parser = stubSampleParseInput("(+ 1 2)");
-        // assertThat(parser.parseExp(), )
+        Parser parser;
+
+        parser = stubSampleParseInput("'()");
+        assertThat(parser.parseExp(), instanceOf(Cons.class));
+
+        parser = stubSampleParseInput("'(1 2 4)");
+        assertThat(parser.parseExp(), instanceOf(Cons.class));
     }
 
 

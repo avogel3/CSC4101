@@ -34,25 +34,62 @@
 // or an RPAREN) and attempts to continue parsing with the next token.
 
 class Parser {
-  private Scanner scanner;
+    private Scanner scanner;
 
-  public Parser(Scanner s) { scanner = s; }
+    /*
+     NOTE: this is from the Project 1 Outline
+     Build your parse tree such that only a single object of class Nil and only two objects of class BoolLit
+     get created. E.g., multiple occurrences of Nil should be pointers pointing to the same object.
+    */
+    private BooleanLit falseyBooleanLit = new BooleanLit(false);
+    private BooleanLit truthyBooleanLit = new BooleanLit(true);
+    private Nil nil = new Nil();
+
+    public Parser(Scanner s) {
+        scanner = s;
+    }
 
 
-  // TODO: Gotta figure out where the QUOTE token fits in all of this
-  public Node parseExp() {
-    // TODO: See below
-    // STRING, INT, BOOLEAN, IDENT -> Call new for literals
-    // LPAREN -> Call parseRest
-    // default/else -> null
-    return null;
-  }
-  
-  protected Node parseRest() {
-    // TODO: See below
-    // RPAREN ->
-    // DOT ->
-    // default/else ->
-    return null;
-  }
+    // TODO: Gotta figure out where the QUOTE token fits in all of this
+    public Node parseExp() {
+        Token token = scanner.getNextToken();
+        switch (token.getType()) {
+            case Token.LPAREN:
+                return parseRest();
+            case Token.FALSE:
+                return falseyBooleanLit;
+            case Token.TRUE:
+                return truthyBooleanLit;
+            case Token.QUOTE:
+                return parseExp();
+            case Token.INT:
+                return new IntLit(token.getIntVal());
+            case Token.STRING:
+                return new StrLit(token.getStrVal());
+            case Token.IDENT:
+                return new Ident(token.getName());
+            default:
+                return null;
+        }
+    }
+
+    protected Node parseRest() {
+        // TODO: See below
+        // RPAREN ->
+        // EXP + ->
+        // DOT EXP ->
+        // default/else ->
+
+        Token token = scanner.getNextToken();
+        switch(token.getType()) {
+            case Token.RPAREN:
+                return null;
+            case Token.DOT:
+                // FIXME: Next line is untested
+                // return new Cons(new Ident(token.getName()), parseExp());
+                return null;
+            default:
+                return new Cons(parseExp(), nil);
+        }
+    }
 };

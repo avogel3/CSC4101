@@ -5,4 +5,5 @@ prog1/prog-uml.pdf
 prog1/prog1.iml
 prog1/test/
 prog1/out
+*.class
 

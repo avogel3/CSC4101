@@ -1,12 +1,10 @@
 import java.io.*;
 
 class Quote extends Special {
- 
-    // TODO: Add any fields needed.
 
- 
-    // TODO: Add an appropriate constructor.
+  // TODO: Add any fields needed.
 
-    void print(Node t, int n, boolean p) {
-    }
+  public Quote() {}
+
+  void print(Node t, int n, boolean p) {}
 }

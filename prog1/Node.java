@@ -55,4 +55,6 @@ class Node {
   public void setCdr(Node d) {
     System.err.println("Method not implemented: setCdr()");
   }
+
+  public String getName() { return null; }
 }

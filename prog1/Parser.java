@@ -83,7 +83,7 @@ class Parser {
             case Token.RPAREN:
                 return nil;
             case Token.DOT:
-                 return new Cons(new Ident(token.getName()), parseRest());
+                 return new Cons(parseExp(), parseRest());
             default:
                 // NOTE: If we get here, `token` is something we can catch in getNodeByTokenType()
                 // and the first token was a `)`

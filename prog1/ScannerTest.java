@@ -74,15 +74,25 @@ public class ScannerTest {
         assertEquals("Hello", stringConstant.getStrVal());
     }
 
-    @Test
-    public void getNextTokenTestIdentifiers() {
-       InputStream sampleInput = stringToByteStream("Hello");
-       Scanner in = new Scanner(sampleInput);
-       Token ident = in.getNextToken();
-       assertEquals(Token.IDENT, ident.getType());
-       assertEquals("Hello", ident.getName());
-       // TODO: Test for valid subsequent. See: http://people.csail.mit.edu/jaffer/r5rs_9.html
-    }
+  @Test
+  public void getNextTokenTestIdentifiers() {
+    InputStream sampleInput = stringToByteStream("Hello");
+    Scanner in = new Scanner(sampleInput);
+    Token ident = in.getNextToken();
+    assertEquals(Token.IDENT, ident.getType());
+    assertEquals("Hello", ident.getName());
+
+    /*
+     * Test for valid subsequent.
+     * See: http://people.csail.mit.edu/jaffer/r5rs_9.html;
+     * Also: https://people.csail.mit.edu/jaffer/r5rs/Identifiers.html
+     */
+    in = new Scanner(stringToByteStream("(+ 1 2 )"));
+    Token first = in.getNextToken();
+    assertEquals(Token.LPAREN, first.getType());
+    Token second = in.getNextToken();
+    assertEquals(Token.IDENT, second.getType());
+   }
 
 
     private InputStream stringToByteStream(String input) {

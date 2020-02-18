@@ -9,6 +9,4 @@ class IntToken extends Token {
   int getIntVal() {
     return intVal;
   }
-
-  public boolean isNumber() { return true; }
 }

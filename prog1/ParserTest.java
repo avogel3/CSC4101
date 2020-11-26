@@ -3,8 +3,8 @@ import org.junit.Test;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.*;
 
 public class ParserTest {
 

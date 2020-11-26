@@ -1,5 +1,3 @@
-import java.io.*;
-
 class Node {
   // The argument of print(int) is the number of characters to indent.
   // Every subclass of Node must implement print(int).

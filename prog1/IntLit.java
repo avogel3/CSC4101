@@ -1,4 +1,3 @@
-import java.io.*;
 class IntLit extends Node {
   private int intVal;
 

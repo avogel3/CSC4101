@@ -1,4 +1,3 @@
-import java.io.*;
 class BooleanLit extends Node {
   private boolean booleanVal;
 

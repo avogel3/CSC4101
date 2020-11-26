@@ -1,5 +1,3 @@
-import java.io.*;
-
 class If extends Special {
  
     // TODO: Add any fields needed.

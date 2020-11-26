@@ -1,5 +1,3 @@
-import java.io.*;
-
 class Lambda extends Special {
     // TODO: Add any fields needed.
 

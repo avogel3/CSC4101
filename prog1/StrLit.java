@@ -1,4 +1,3 @@
-import java.io.*;
 class StrLit extends Node {
   private String strVal;
 

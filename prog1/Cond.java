@@ -1,5 +1,3 @@
-import java.io.*;
-
 class Cond extends Special {
  
     // TODO: Add any fields needed.

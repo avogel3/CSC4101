@@ -1,5 +1,3 @@
-import java.io.*;
-
 class Let extends Special {
  
     // TODO: Add any fields needed.

@@ -5,8 +5,7 @@ class StrLit extends Node {
   public StrLit(String s) { strVal = s; }
 
   public void print(int n) {
-    for (int i = 0; i < n; i++)
-      System.out.print(" ");
+    System.out.print(" ".repeat(n));
 
     System.out.println("\"" + strVal + "\"");
   }

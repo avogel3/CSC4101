@@ -7,8 +7,7 @@ class IntLit extends Node {
   }
 
   public void print(int n) {
-    for (int i = 0; i < n; i++)
-      System.out.print(" ");
+    System.out.print(" ".repeat(n));
 
     System.out.print(intVal);
   }

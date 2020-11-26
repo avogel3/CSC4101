@@ -24,7 +24,7 @@ class Scanner {
         char ch = nextCharacterFromStream();
 
         // Skip White Space
-        if (isWhiteSpace(ch)) {
+        if (Character.isWhitespace(ch)) {
             return getNextToken();
         }
 
@@ -100,14 +100,6 @@ class Scanner {
             System.err.println("Illegal character '" + (char) ch + "' following #");
             return getNextToken();
         }
-    }
-
-    private boolean isWhiteSpace(char ch) {
-        return (ch == ' '
-                || ch == '\t'
-                || ch == '\n'
-                || ch == '\r'
-                || ch == '\f');
     }
 
     private boolean isValidIdentifierInitial(char ch) {

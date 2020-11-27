@@ -31,6 +31,8 @@ Below is example output of the parser/pretty printer
   => (+ 2 3)
   'foo
   => (quote foo)
+  (define x 0)
+  => (define x 0)
 ```
 
 

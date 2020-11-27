@@ -1,12 +1,20 @@
 class Quote extends Special {
 
-  // TODO: Add any fields needed.
-
   public Quote() {}
 
   void print(Node t, int n, boolean p) {
-    System.out.println("Quote.print called");
-    t.getCar().print(1);
-    t.getCdr().print(0, true);
+    System.out.print(" ".repeat(n));
+
+    if(!p) {
+      System.out.print("(");
+    }
+    t.getCar().print(0);
+   
+    Node rest = t.getCdr();
+    while(!rest.isNull()) {
+      rest.getCar().print(1);
+      rest = rest.getCdr();
+    }
+    System.out.println(")");
   }
 }

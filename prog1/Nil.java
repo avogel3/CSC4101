@@ -4,9 +4,9 @@ class Nil extends Node {
   public void print(int n)		{ print(n, false); }
   public void print(int n, boolean shouldCloseParens) {
     System.out.print(" ".repeat(n));
-    
+   
     if (shouldCloseParens) { 
-      System.out.print(")\n");
+      System.out.print(")");
     } else {
       System.out.println("()");
     }

@@ -4,7 +4,7 @@
 
 This is a scheme lang recursive decent parser and pretty printer. You can read more about SchemeLang using the [online reference](https://www.scheme.com/tspl4/).
 
-This iteration of the parser is not a full featured. Please refer to the below outline for example output and some notes on functionality.  
+This iteration of the parser is not full featured. Please refer to the below outline for example output and some notes on functionality.  
 
 According to the rubric, this Lexical Analyzer needs to be able to do the following: 
 
@@ -17,7 +17,7 @@ According to the rubric, this Lexical Analyzer needs to be able to do the follow
 - Recognize identifiers
 
 
-Below is example output of the parser/pretty printer
+Below is example output of the pretty printer
 ```
   123
   => 123
@@ -33,6 +33,8 @@ Below is example output of the parser/pretty printer
   => (quote foo)
   (define x 0)
   => (define x 0)
+  (set! x (+ 2 3))
+  => (set! x (+ 2 3))
 ```
 
 

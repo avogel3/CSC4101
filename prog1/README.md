@@ -17,7 +17,7 @@ According to the rubric, this Lexical Analyzer needs to be able to do the follow
 - Recognize identifiers
 
 
-Below is example output of the pretty printer
+Below is an example of the expected output of the pretty printer:
 ```
   123
   => 123
@@ -35,6 +35,12 @@ Below is example output of the pretty printer
   => (define x 0)
   (set! x (+ 2 3))
   => (set! x (+ 2 3))
+  (begin (set! x 6) (set! y 7) (* x y))
+  => (begin
+      (set! x 6)
+      (set! y 7)
+      (* x y)
+  )
 ```
 
 

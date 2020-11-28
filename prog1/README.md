@@ -43,6 +43,8 @@ Below is an example of the expected output of the pretty printer:
   )
 ```
 
+### Running the Tests
 
+JUnit is used to test some of the main parts of this project. To run the tests locally, download the `JUnit4` and `hamcrest-core-1.3` jar files and add them to the `lib` directory.
 
 ##### Andrew Vogel

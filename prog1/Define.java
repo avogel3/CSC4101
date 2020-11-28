@@ -14,7 +14,12 @@ class Define extends Special {
 
     Node rest = t.getCdr();
     while(!rest.isNull()) {
-      rest.getCar().print(1);
+      if(!rest.getCdr().isNull() && rest.getCddr().isNull()) {
+        rest.getCar().print(1);
+      } else {
+        System.out.println();
+        rest.getCar().print(4);
+      }
       rest = rest.getCdr();
     }
     System.out.println(")");

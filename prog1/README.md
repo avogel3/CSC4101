@@ -41,10 +41,23 @@ Below is an example of the expected output of the pretty printer:
       (set! y 7)
       (* x y)
   )
+  (define (fac n) (if (= n 0) 1 (* n (fac (- n 1)))))
+  => (define (fac n)
+      (if (= n 0)
+          1
+          (* n (fac (- n 1)))
+      )
+  )
 ```
 
 ### Running the Tests
 
 JUnit is used to test some of the main parts of this project. To run the tests locally, download the `JUnit4` and `hamcrest-core-1.3` jar files and add them to the `lib` directory.
+
+### List of Helpful References
+
+* [Public Link to the Prog1 Rubric by Professor Baumgartner](http://docplayer.net/48192284-Project-1-scheme-pretty-printer.html)
+* [Scheme Reference](https://www.scheme.com/tspl4/)
+* [List of Shorthand Access Methods](https://franz.com/support/documentation/current/ansicl/dictentr/carcdrca.htm)
 
 ##### Andrew Vogel

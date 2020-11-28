@@ -33,6 +33,9 @@ class Node {
   public boolean isNull()   { return false; }  // nil
   public boolean isPair()   { return false; }  // Cons
 
+  // NOTE: Helpful list for constructing shorthand access methods below
+  // https://franz.com/support/documentation/current/ansicl/dictentr/carcdrca.htm
+
   // TODO: Report an error in these default methods and implement them
   // in class Cons.  After setCar, a Cons cell needs to be `parsed' again
   // using parseList.
@@ -43,6 +46,16 @@ class Node {
   
   public Node getCdr() {
     System.err.println("Method not implemented: getCdr()");
+    return null;
+  }
+
+  public Node getCddr() {
+    System.err.println("Method not implemented: getCddr()");
+    return null;
+  }
+
+  public Node getCdar() {
+    System.err.println("Method not implemented: getCdar() (shorthand for getCdr.getCar)");
     return null;
   }
   

@@ -59,6 +59,14 @@ class Cons extends Node {
   public Node getCdr() {
     return cdr;
   }
+  
+  public Node getCddr() {
+    return cdr.getCdr();
+  }
+  
+  public Node getCdar() {
+    return cdr.getCar();
+  }
 
   public boolean isPair() {
     return true;

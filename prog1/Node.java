@@ -36,7 +36,7 @@ class Node {
   // NOTE: Helpful list for constructing shorthand access methods below
   // https://franz.com/support/documentation/current/ansicl/dictentr/carcdrca.htm
 
-  // TODO: Report an error in these default methods and implement them
+  // NOTE: Report an error in these default methods and implement them
   // in class Cons.  After setCar, a Cons cell needs to be `parsed' again
   // using parseList.
   public Node getCar() {

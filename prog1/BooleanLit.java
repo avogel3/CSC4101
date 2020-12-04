@@ -6,13 +6,7 @@ class BooleanLit extends Node {
   }
 
   public void print(int n) {
-    System.out.print(" ".repeat(n));
-    
-    if (booleanVal) {
-      System.out.println("#t");
-    } else {
-      System.out.println("#f");
-    }
+    System.out.print(" ".repeat(n) + (booleanVal ? "#t" : "#f"));
   }
 
   public boolean isBoolean() { return true; }

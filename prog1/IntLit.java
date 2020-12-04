@@ -6,9 +6,7 @@ class IntLit extends Node {
   }
 
   public void print(int n) {
-    System.out.print(" ".repeat(n));
-
-    System.out.print(intVal);
+    System.out.print(" ".repeat(n) + intVal);
   }
 
   public boolean isNumber() {

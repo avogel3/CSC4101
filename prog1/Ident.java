@@ -8,7 +8,7 @@ class Ident extends Node {
   public void print(int n) {
     System.out.print(" ".repeat(n));
 
-    System.out.print(name);
+    System.out.print(" ".repeat(n) + (name == "quote" ? "'" : name));
   }
 
   public String getName() {

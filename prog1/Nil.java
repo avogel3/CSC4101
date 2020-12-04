@@ -6,9 +6,9 @@ class Nil extends Node {
     System.out.print(" ".repeat(n));
    
     if (openParenWasPrinted) { 
-      System.out.print(")");
+      System.out.println(")");
     } else {
-      System.out.print("()");
+      System.out.println("()");
     }
   }
 

@@ -49,7 +49,6 @@ public class Main {
     while (root != null) {
       System.out.print("=> ");
       root.print(0);
-      System.out.println();
       root = parser.parseExp();
     }
     System.exit(0);

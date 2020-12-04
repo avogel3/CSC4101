@@ -6,13 +6,9 @@ class Begin extends Special {
       System.out.print("(");
     }
     t.getCar().print(0);
-    
-    Node rest = t.getCdr();
-    while(!rest.isNull()) {
-      System.out.println();
-      rest.getCar().print(4);
-      rest = rest.getCdr();
-    }
-    System.out.println("\n)");
+
+    int indentSpace = t.getCdr().isNull() ? 0 : n + 4;
+    System.out.println("");
+    t.getCdr().print(indentSpace, true);
   }
 }

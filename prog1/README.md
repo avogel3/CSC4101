@@ -4,9 +4,9 @@
 
 This is a scheme lang recursive decent parser and pretty printer. You can read more about SchemeLang using the [online reference](https://www.scheme.com/tspl4/).
 
-This iteration of the parser is not full featured. Please refer to the below outline for example output and some notes on functionality.  
+This iteration of the parser is not full featured. Please refer to the below outline for example output and some notes on functionality. (Rubric Linked at the bottom) 
 
-According to the rubric, this Lexical Analyzer needs to be able to do the following: 
+According to the rubric, this Lexical Analyzer needs to be able to do the following in addition to a small subset of pretty printing: 
 
 - Discard whitespace including - space, tab, newline, carriage-return, and form-feed characters
 - Discard comments - everything from ; to the end of the line
@@ -16,11 +16,14 @@ According to the rubric, this Lexical Analyzer needs to be able to do the follow
 - Recognize string constants (anything between double quotes)
 - Recognize identifiers
 
+### Example Usage
 
 Below is an example of the expected output of the pretty printer:
 ```
   123
   => 123
+  "some string"
+  => "some string"
   #t
   => #t
   #f
@@ -30,7 +33,9 @@ Below is an example of the expected output of the pretty printer:
   (+2 3) ;this is a comment
   => (+ 2 3)
   'foo
-  => (quote foo)
+  => 'foo
+  '(1 2 3)
+  => `(1 2 3)
   (define x 0)
   => (define x 0)
   (set! x (+ 2 3))

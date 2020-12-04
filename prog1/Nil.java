@@ -2,13 +2,13 @@ class Nil extends Node {
   public Nil() { }
 
   public void print(int n)		{ print(n, false); }
-  public void print(int n, boolean shouldCloseParens) {
+  public void print(int n, boolean openParenWasPrinted) {
     System.out.print(" ".repeat(n));
    
-    if (shouldCloseParens) { 
+    if (openParenWasPrinted) { 
       System.out.print(")");
     } else {
-      System.out.println("()");
+      System.out.print("()");
     }
   }
 

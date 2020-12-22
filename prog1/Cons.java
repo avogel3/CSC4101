@@ -45,11 +45,11 @@ class Cons extends Node {
   }
 
   void print(int n) {
-    form.print(this, n, false);
+    form.print(this, n, false, false);
   }
 
-  void print(int n, boolean openParenWasPrinted) {
-    form.print(this, n, openParenWasPrinted);
+  void print(int n, boolean openParenWasPrinted, boolean q) {
+    form.print(this, n, openParenWasPrinted, q);
   }
 
   public Node getCar() {

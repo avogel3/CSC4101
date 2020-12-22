@@ -5,6 +5,6 @@
 // is to not add any fields and to use empty constructors.
 
 abstract class Special {
-    abstract void print(Node t, int n, boolean p);
+    abstract void print(Node t, int n, boolean p, boolean printNewLine);
 }
 

@@ -1,5 +1,6 @@
 class Begin extends Special {
-  void print(Node t, int n, boolean p) {
+  void print(Node t, int n, boolean p, boolean q) {
+    if(q) System.out.println();
     System.out.print(" ".repeat(n));
 
     if(!p) {
@@ -8,7 +9,8 @@ class Begin extends Special {
     t.getCar().print(0);
 
     int indentSpace = t.getCdr().isNull() ? 0 : n + 4;
-    System.out.println("");
-    t.getCdr().print(indentSpace, true);
+    
+    // Note: last bool on this line probs shouldn't be hard coded, but w/e
+    t.getCdr().print(indentSpace, true, true);
   }
 }

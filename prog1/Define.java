@@ -1,5 +1,6 @@
 class Define extends Special {
-  void print(Node t, int n, boolean p) {
+  void print(Node t, int n, boolean p, boolean q) {
+    if(q) System.out.println();
     System.out.print(" ".repeat(n));
 
     if (!p) {
@@ -7,16 +8,8 @@ class Define extends Special {
     }
     t.getCar().print(0);
 
-    Node rest = t.getCdr();
-    while(!rest.isNull()) {
-      if(!rest.getCdr().isNull() && rest.getCddr().isNull()) {
-        rest.getCar().print(1);
-      } else {
-        System.out.println();
-        rest.getCar().print(4);
-      }
-      rest = rest.getCdr();
-    }
-    System.out.println(")");
+    int minNumSpaces = n > 1 ? n : 1;
+    int indentSpace = t.getCdr().isNull() ? 0 : minNumSpaces;
+    t.getCdr().print(indentSpace, true, q);
   }
 }

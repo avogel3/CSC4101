@@ -150,7 +150,10 @@ class Scanner {
             charCount++;
         }
 
-        pushBackStream(ch);
+        // FIXME: can probably do this check in the main case statement above
+        if(type != "STRING") {
+            pushBackStream(ch);
+        }
 
         return getStringFromBuffer(charCount);
     }

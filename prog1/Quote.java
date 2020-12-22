@@ -1,17 +1,14 @@
 class Quote extends Special {
-  void print(Node t, int n, boolean p) {
+  void print(Node t, int n, boolean p, boolean q) {
+    if(q) System.out.println();
     System.out.print(" ".repeat(n));
 
-    if(!p) {
-      System.out.print("(");
-    }
     t.getCar().print(0);
-   
+    // FIXME: this isn't recursive, but this works for now
     Node rest = t.getCdr();
     while(!rest.isNull()) {
-      rest.getCar().print(1);
+      rest.getCar().print(0);
       rest = rest.getCdr();
     }
-    System.out.println(")");
   }
 }

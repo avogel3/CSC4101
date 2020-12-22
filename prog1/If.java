@@ -1,5 +1,6 @@
 class If extends Special {
-  void print(Node t, int n, boolean p) {
+  void print(Node t, int n, boolean p, boolean q) {
+    if(q) System.out.println();
     String indent = " ".repeat(n);
     System.out.print(indent);
 
@@ -13,7 +14,7 @@ class If extends Special {
     
     if(!t.getCddr().isNull()) {
       System.out.println();
-      t.getCddr().print(n + 4, true);
+      t.getCddr().print(n + 4, true, q);
     }
   }
 }

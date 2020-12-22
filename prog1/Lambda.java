@@ -1,5 +1,6 @@
 class Lambda extends Special {
-  void print(Node t, int n, boolean p) {
+  void print(Node t, int n, boolean p, boolean q) {
+    if(q) System.out.println();
     String indent = " ".repeat(n);
     System.out.print(indent);
 

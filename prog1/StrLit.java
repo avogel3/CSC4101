@@ -4,7 +4,7 @@ class StrLit extends Node {
   public StrLit(String s) { strVal = s; }
 
   public void print(int n) {
-    System.out.print(" ".repeat(n) + "\"" + strVal + "\"");
+    System.out.println(" ".repeat(n) + "\"" + strVal + "\"");
   }
 
   public boolean isString() { return true; }

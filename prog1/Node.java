@@ -18,7 +18,7 @@ class Node {
   // encode that in the sign bit of n.  If you need additional parameters,
   // make sure that you define the method print in all the appropriate
   // subclasses of Node as well.
-  void print(int n, boolean p) {
+  void print(int n, boolean p, boolean printNewLine) {
     print(n);
   }
 

@@ -30,7 +30,11 @@ class Cons extends Node {
       case "cond":
         return new Cond();
       case "define":
-        return new Define();
+        if(cdr.getCdar().isPair()) {
+          return new Define();
+        } else {
+          return new Regular();
+        }
       case "set!":
         return new Set();
       default:

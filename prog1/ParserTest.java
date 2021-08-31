@@ -123,6 +123,7 @@ public class ParserTest {
     
     @Test
     public void testParseExpSingleLineDefine() {
+        // NOTE: this CONS expression is not considered a special form
         parseAndPrintInput("(define x 0)\n");
         assertEquals(outputStreamCaptor.toString().trim(), "(define x 0)");
     }
@@ -149,6 +150,7 @@ public class ParserTest {
 
     @Test
     public void testParseExpNestedDefine() {
+        // NOTE: this CONS expression is considered a special form
         String input = "(define (fac n) (if (= n 0) 1 (* n (fac (- n 1)))))";
         parseAndPrintInput(input);
 

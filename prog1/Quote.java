@@ -7,7 +7,7 @@ class Quote extends Special {
     // FIXME: this isn't recursive, but this works for now
     Node rest = t.getCdr();
     while(!rest.isNull()) {
-      rest.getCar().print(0);
+      rest.getCar().print(n);
       rest = rest.getCdr();
     }
   }

@@ -8,7 +8,7 @@ class Begin extends Special {
     }
     t.getCar().print(0);
 
-    int indentSpace = t.getCdr().isNull() ? 0 : n + 4;
+    int indentSpace = t.getCdr().isNull() ? n : n + 4;
     
     // NOTE: last bool on this line probs shouldn't be hard coded, but w/e
     t.getCdr().print(indentSpace, true, true);

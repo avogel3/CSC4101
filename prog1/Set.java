@@ -6,8 +6,8 @@ class Set extends Special {
     if (!p) {
         System.out.print("(");
     }
-    t.getCar().print(0);
+    t.getCar().print(n);
     if(!t.getCdr().isNull()) System.out.print(" ");
-    t.getCdr().print(0, true, q);
+    t.getCdr().print(n, true, q);
   }
 }

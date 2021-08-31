@@ -6,12 +6,12 @@ class Let extends Special {
     if(!p) {
       System.out.print("(");
     }
-    t.getCar().print(0);
+    t.getCar().print(n);
     
     Node rest = t.getCdr();
     while(!rest.isNull()) {
       System.out.println();
-      rest.getCar().print(4);
+      rest.getCar().print(n + 4);
       rest = rest.getCdr();
     }
     System.out.println("\n)");

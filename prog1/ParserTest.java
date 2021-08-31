@@ -147,6 +147,20 @@ public class ParserTest {
         assertEquals(outputStreamCaptor.toString().trim().replaceAll("\r\n", "\n"), expectedOutput);
     }
 
+    @Test
+    public void testParseExpNestedDefine() {
+        String input = "(define (fac n) (if (= n 0) 1 (* n (fac (- n 1)))))";
+        parseAndPrintInput(input);
+
+        String expectedOutput = "(define (fac n)\n" +
+        "    (if (= n 0)\n" +
+        "        1\n" +
+        "        (* n (fac (- n 1)))\n" +
+        "    )\n" +
+        ")";
+        assertEquals(outputStreamCaptor.toString().trim().replaceAll("\r\n", "\n"), expectedOutput);
+    }
+
     private void parseAndPrintInput(String input) {
         Parser parser = stubSampleParseInput(input);
         // NOTE: This a copy pasta from Main.java.

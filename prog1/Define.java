@@ -3,7 +3,7 @@ class Define extends Special {
     if(q) System.out.println();
     System.out.print(" ".repeat(n));
 
-    if (!p) {
+    if(!p) {
       System.out.print("(");
     }
     t.getCar().print(0);

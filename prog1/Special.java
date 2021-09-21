@@ -5,6 +5,12 @@
 // is to not add any fields and to use empty constructors.
 
 abstract class Special {
-    abstract void print(Node t, int n, boolean p, boolean printNewLine);
+    /**
+     * @param t the node to begin printing
+     * @param n the number of spaces to indent
+     * @param parenWasPrinted true if the starting paren was printed  
+     * @param printNewLine true if a new line character needs to be printed
+     */
+    abstract void print(Node t, int n, boolean parenWasPrinted, boolean printNewLine);
 }
 
